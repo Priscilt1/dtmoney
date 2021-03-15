@@ -10,7 +10,7 @@
 <br>
 
 <h3> ☕ Sobre aplicação </h3>
-Trata-se de um controle de financiancias pessoais
+Trata-se de um controle de financiancias pessoal
 <br>
 
 <h3> ⚙️ Funcionalidades </h3>
