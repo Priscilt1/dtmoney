@@ -1,5 +1,5 @@
 
-![ignite](https://user-images.githubusercontent.com/58517014/111157297-7d9c5f80-8575-11eb-8fc5-9fabbf9f6a20.png)
+![cover-reactjs](https://user-images.githubusercontent.com/58517014/111197217-fbc02c80-859c-11eb-9360-78d47ae732ed.png)
 
 <h1 align="center">  💰 dtmoney 🤑 </h1>
 <br>
