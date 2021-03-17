@@ -54,5 +54,28 @@ export const GlobalStyle = createGlobalStyle`
     opacity: 0.6;
     cursor: not-allowed; //plaquinha de nao permitido
   }
+
+  /* ESTILIZAÇÃO DO MODAL */
+  .react-modal-overlay{
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed; //para o modal ficar fixo mesmo quando tiver rolagem na tela
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-modal-content {
+    width: 100%;
+    max-width: 576px;
+    background: var(--background);
+    padding: 3rem;
+    position: relative; //para o icone de fechar ficar proximo ao modal
+    border-radius: 0.24rem;
+  }
   
 `
