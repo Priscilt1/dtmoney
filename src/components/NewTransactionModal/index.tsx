@@ -1,10 +1,11 @@
+import { FormEvent, useState } from 'react'
+
 import Modal from 'react-modal'
 import { Container, TransactionTypeContainer, RadioBox } from './styles'
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import { api } from '../../services/api'
 import outcomeImg from '../../assets/outcome.svg'
-import { FormEvent, useState } from 'react'
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -20,7 +21,7 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
   const [type, setType] = useState ('deposit')
 
   function handleCreateNewTransaction(event: FormEvent) {
-    event.preventDefault()
+    event.preventDefault() //prevenindo o comportamento padrao do html de tentar levar para outra pagina quando submete o formulario 
 
     const data = {
       title,
@@ -52,12 +53,12 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
       </button>
 
       {/* formulario */}
-      <Container onSubmit={handleCreateNewTransaction}> 
+      <Container onSubmit={handleCreateNewTransaction}> {/*toda vez que clicar em submeter, vai disparar essa funcao */}
         <h2>Cadastrar transação</h2>
 
         <input 
           placeholder="Título"
-          value={title}
+          value={title} //armazenando a informacao no value
           onChange={event => setTitle(event.target.value)} //salvando o que for digitado no input
         />
 
@@ -65,7 +66,7 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
           type="number"
           placeholder="Valor"
           value={value}
-          onChange={event => setValue(Number(event.target.value))} //precisa converter para ser numerico
+          onChange={event => setValue(Number(event.target.value))} //convertendo para ser numerico no lugar de string
         />
 
         <TransactionTypeContainer>

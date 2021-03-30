@@ -53,7 +53,7 @@ export const TransactionTypeContainer = styled.div`
   gap: 0.5rem;
 `
 
-interface RadioBoxProps {
+interface RadioBoxProps { //typescript
   isActive: boolean;
   activeColor: 'green' | 'red'; //pode receber green ou red
 }
@@ -63,7 +63,7 @@ const colors = {
   red: '#e52e4d'
 }
 
-export const RadioBox = styled.button<RadioBoxProps>`
+export const RadioBox = styled.button<RadioBoxProps>` //typescript
   height: 4rem;
   border: 1px solid #d7d7d7;
   border-radius: 0.25rem;
@@ -71,7 +71,7 @@ export const RadioBox = styled.button<RadioBoxProps>`
   /* se o props active for true, vai ter a colors, se nao, sera transparente */
   background: ${(props) => props.isActive
    ? transparentize(0.9, colors[props.activeColor]) //lembrando que sera aplicado apenas no background color
-   : 'transparent'
+   : 'transparent' //o transparent vem do polished
   }; //o css é colocado dentro de aspas
   
   display: flex;

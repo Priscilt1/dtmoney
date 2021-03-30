@@ -8,6 +8,7 @@ import { GlobalStyle } from "./styles/global"
 Modal.setAppElement('#root') //questao de acessibilidade
 
 export function App() {
+  //componente pai 
  // MODAL (usando a biblioteca React Modal)
  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false)
 
@@ -22,10 +23,12 @@ export function App() {
 
   return (
     <>
+      {/* componente filho - pegando o modal */}
       <Header onOpenNewTransactionsModal={handleOpenNewTransactionModal} />
 
       <Dashboard />
       
+      {/* componente filho - pegando o modal */}
       <NewTransactionModal 
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
