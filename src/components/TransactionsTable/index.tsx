@@ -37,9 +37,18 @@ export function TransactionsTable() {
          {transactions.map(transaction => ( //retornando os dados
           <tr key={transaction.id}>
             <td>{transaction.title}</td>
-            <td className={transaction.type}>{transaction.amount}</td>
+            <td className={transaction.type}>
+              {new Intl.NumberFormat('pt-BR', { //formatação de moeda, dinheiro (de acordo com a moeda brasileira)
+                style: 'currency',
+                currency: 'BRL'
+              }).format(transaction.amount)}
+            </td>
             <td>{transaction.category}</td>
-            <td>{transaction.createdAt}</td>
+            <td>
+              {new Intl.DateTimeFormat('pt-BR').format(
+                new Date (transaction.createdAt) //o intl só trabalha com numeros, entao precisou converter a string para number 
+              )}
+            </td>
           </tr>
           ))}
         </tbody>
