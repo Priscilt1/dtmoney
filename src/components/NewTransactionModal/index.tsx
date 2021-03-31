@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 
 import Modal from 'react-modal'
 import { Container, TransactionTypeContainer, RadioBox } from './styles'
@@ -6,6 +6,7 @@ import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import { api } from '../../services/api'
 import outcomeImg from '../../assets/outcome.svg'
+import { TransactionsContext } from '../../TransactionsContext'
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -13,26 +14,25 @@ interface NewTransactionModalProps {
 }
 
 export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModalProps) { //pegando as propriedades atraves da destruturação
+  const { createTransaction } = useContext(TransactionsContext) //pegando no contexto
+
   const [title, setTitle] = useState('')
-  const [value, setValue] = useState(0)
+  const [amount, setAmount] = useState(0)
   const [category, setCategory] = useState('')
   
   //criando o estado para armazenar a informação de qual botão foi selecionado
   const [type, setType] = useState ('deposit')
 
+  //Cadastro de uma nova transação
   function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault() //prevenindo o comportamento padrao do html de tentar levar para outra pagina quando submete o formulario 
 
-    const data = {
-      title,
-      value,
-      category,
-      type,
-    }
-
-    // inserindo a api
-    api.post('transactions', data)
-
+    createTransaction({
+      title, 
+      amount,
+      category, 
+      type
+    })
   }
   
   return(
@@ -65,8 +65,8 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
         <input 
           type="number"
           placeholder="Valor"
-          value={value}
-          onChange={event => setValue(Number(event.target.value))} //convertendo para ser numerico no lugar de string
+          value={amount}
+          onChange={event => setAmount(Number(event.target.value))} //convertendo para ser numerico no lugar de string
         />
 
         <TransactionTypeContainer>

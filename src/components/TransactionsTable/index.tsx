@@ -5,7 +5,7 @@ import { TransactionsContext } from "../../TransactionsContext"
 
 export function TransactionsTable() {
   //importando contexto
-  const transactions = useContext(TransactionsContext)
+  const { transactions } = useContext(TransactionsContext)
 
   return (
     <Container>

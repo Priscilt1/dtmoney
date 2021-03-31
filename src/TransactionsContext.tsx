@@ -11,13 +11,25 @@ interface Transaction {
   createdAt: string
 }
 
+// criando um tipo herdando a interface transaction, mas omitindo o id, createdAt
+type TransactionInput = Omit<Transaction, 'id' | 'createdAt'> 
+
+
 //falando que o componente TransactionsProvider ira receber um conteudo dentro dele 
 interface TransactionsProvideProps {
   //quando for tipar children, pode usar um reactNode que aceita qualquer conteudo que poderia colocar dentro do arquivo tsx
   children: ReactNode
 }
 
-export const TransactionsContext = createContext<Transaction[]>([]) //passando o valor default, ou seja, o valor que ele deve iniciar
+//formato do contexto
+interface TransactionsContextData {
+  transactions: Transaction[] //tipo = array de transaction
+  createTransaction: (transaction: TransactionInput) => void //tipo = funcao sem retorno
+}
+
+export const TransactionsContext = createContext<TransactionsContextData>(
+    {} as TransactionsContextData //forçando a tipagem
+  ) //passando o valor default, ou seja, o valor que ele deve iniciar
 
 export function TransactionsProvider ({ children }: TransactionsProvideProps) { //logica de carregamento de dados
    //salvando array de transactions / carregamento de dados
@@ -28,8 +40,13 @@ export function TransactionsProvider ({ children }: TransactionsProvideProps) { 
        .then(response => setTransactions(response.data.transactions)) //listando os dados, salvando no estado
    }, [])
 
+   function createTransaction(transaction: TransactionInput) {
+    // inserindo a api
+    api.post('transactions', transaction)
+   }
+
    return(
-     <TransactionsContext.Provider value={transactions}> {/*pasando o valor atual do contexto */}
+     <TransactionsContext.Provider value={{ transactions, createTransaction }}>  {/*retornando objeto, a listagem e a funcao createTransaction*/}
       {children}
      </TransactionsContext.Provider>
    )
