@@ -1,6 +1,6 @@
 //Criando contexto
-import { createContext, useState, useEffect, ReactNode } from 'react'
-import { api } from "./services/api"
+import { createContext, useState, useEffect, ReactNode, useContext } from 'react'
+import { api } from "../services/api"
 
 interface Transaction {
   id: number
@@ -27,7 +27,7 @@ interface TransactionsContextData {
   createTransaction: (transaction: TransactionInput) => Promise<void> //tipo = funcao sem retorno
 }
 
-export const TransactionsContext = createContext<TransactionsContextData>(
+const TransactionsContext = createContext<TransactionsContextData>(
     {} as TransactionsContextData //forçando a tipagem
   ) //passando o valor default, ou seja, o valor que ele deve iniciar
 
@@ -60,4 +60,11 @@ export function TransactionsProvider ({ children }: TransactionsProvideProps) { 
       {children}
      </TransactionsContext.Provider>
    )
+}
+
+// criando hook para diminuir a importacao
+export function useTransactions() {
+  const context = useContext(TransactionsContext)
+
+  return context
 }

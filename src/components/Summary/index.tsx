@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import totalImg from '../../assets/total.svg'
-import { TransactionsContext } from '../../TransactionsContext'
+import { useTransactions } from '../../hooks/useTransactions';
 
 import { Container } from "./styles";
 
 export function Summary() {
   // passando o contexto
-  const { transactions } = useContext(TransactionsContext)
+  const { transactions } = useTransactions()
 
   // Calculando os totais   
   // reduce passa por todas as transações e calcula um total. O acc, é um acculumator
