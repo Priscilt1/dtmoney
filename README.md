@@ -5,7 +5,7 @@
 <br>
 
 <h4 align="center"> 
-   Status do Projeto: <b> Em andamento 🚧</b>
+   Status do Projeto: <b> Concluido ✅</b>
 </h4>
 <br>
 
