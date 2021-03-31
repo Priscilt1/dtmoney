@@ -24,7 +24,7 @@ interface TransactionsProvideProps {
 //formato do contexto
 interface TransactionsContextData {
   transactions: Transaction[] //tipo = array de transaction
-  createTransaction: (transaction: TransactionInput) => void //tipo = funcao sem retorno
+  createTransaction: (transaction: TransactionInput) => Promise<void> //tipo = funcao sem retorno
 }
 
 export const TransactionsContext = createContext<TransactionsContextData>(
@@ -40,9 +40,19 @@ export function TransactionsProvider ({ children }: TransactionsProvideProps) { 
        .then(response => setTransactions(response.data.transactions)) //listando os dados, salvando no estado
    }, [])
 
-   function createTransaction(transaction: TransactionInput) {
+   async function createTransaction(transactionInput: TransactionInput) {
     // inserindo a api
-    api.post('transactions', transaction)
+    const response = await api.post('/transactions', {
+      ...transactionInput,//pegando a resposta da inserção
+      createdAt: new Date()
+    }) 
+    const { transaction } = response.data //acessando o transaction dentro do response do axios
+
+    // toda vez que quiser adicionar uma informacao no vetor no estado do react, copia todas as informacoes e add a nova informacao no final. Estado de imutabilidade
+    setTransactions([
+      ...transactions,
+      transaction
+    ])
    }
 
    return(

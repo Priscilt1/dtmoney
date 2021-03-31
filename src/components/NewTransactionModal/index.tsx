@@ -24,15 +24,22 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
   const [type, setType] = useState ('deposit')
 
   //Cadastro de uma nova transação
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault() //prevenindo o comportamento padrao do html de tentar levar para outra pagina quando submete o formulario 
 
-    createTransaction({
+    await createTransaction({ //esperar para ver o cadastro da certo
       title, 
       amount,
       category, 
       type
     })
+
+    // setando os valores do input
+    setTitle('')
+    setAmount(0)
+    setCategory('')
+    setType('deposit')
+    onRequestClose() //fechando o modal caso a consiga fazer o cadastro
   }
   
   return(
