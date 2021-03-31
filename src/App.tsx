@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { Header } from "./components/Header"
 import { NewTransactionModal } from "./components/NewTransactionModal"
 import { GlobalStyle } from "./styles/global"
+import { TransactionsContext } from "./TransactionsContext"
 
 Modal.setAppElement('#root') //questao de acessibilidade
 
@@ -22,7 +23,8 @@ export function App() {
 
 
   return (
-    <>
+    // passando o contexto, englobando todos os componente. 
+    <TransactionsContext.Provider value={[]}> {/*pasando o valor atual do contexto */}
       {/* componente filho - pegando o modal */}
       <Header onOpenNewTransactionsModal={handleOpenNewTransactionModal} />
 
@@ -35,6 +37,6 @@ export function App() {
       />
       
       <GlobalStyle />
-    </>
+    </TransactionsContext.Provider>
   )
 }

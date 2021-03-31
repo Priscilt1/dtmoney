@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
-import { Container } from "./styles";
+import { useEffect, useState, useContext } from "react";
+import { api } from "../../services/api"
+import { Container } from "./styles"
+import { TransactionsContext } from "../../TransactionsContext"
 
 interface Transaction {
   id: number
@@ -12,6 +13,9 @@ interface Transaction {
 }
 
 export function TransactionsTable() {
+  //importando contexto
+  const data = useContext(TransactionsContext)
+
   //salvando array de transactions
   const [transactions, setTransactions] = useState<Transaction[]>([]) //<Transaction[]> falando que armazena um ARRAY de transaction com o tipo que esta na sua interface
 
